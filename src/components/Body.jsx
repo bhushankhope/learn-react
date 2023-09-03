@@ -5,6 +5,8 @@ import { Button } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/react";
 import ShimmerUI from "./Shimmer";
 import { Input } from "@nextui-org/react";
+import NextCard from "./NextCard";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -34,6 +36,8 @@ const Body = () => {
     setFilteredRestaurants(filteredList);
   };
 
+  console.log(restaurants);
+
   return restaurants.length === 0 ? (
     <Spinner>Loading</Spinner>
   ) : (
@@ -52,7 +56,6 @@ const Body = () => {
           <Button
             color="success"
             onClick={() => {
-              console.log(searchText);
               const searchedRestaurants = restaurants.filter((res) =>
                 res.card.card.info.name
                   .toLowerCase()
@@ -74,12 +77,18 @@ const Body = () => {
         </Button>
       </div>
       <div className="flex flex-wrap">
-        {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.card.card?.info.id}
-            restaurantData={restaurant}
-          ></RestaurantCard>
-        ))}
+        {filteredRestaurants.length === 0 ? (
+          <h1>No restaurants available</h1>
+        ) : (
+          filteredRestaurants.map((restaurant) => (
+            <Link
+              key={restaurant.card.card?.info.id}
+              to={"/restaurants/" + restaurant?.card?.card?.info?.id}
+            >
+              <NextCard restaurantData={restaurant}></NextCard>
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

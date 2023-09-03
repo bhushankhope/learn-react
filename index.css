@@ -33,7 +33,7 @@
 }
 
 .restaurant-card {
-  max-width: 20rem;
+  max-width: 18rem;
 }
 
 .restaurant-card:hover {
@@ -47,4 +47,8 @@
 .restaurant-est-time {
   margin: 0.5rem 0rem;
   overflow-wrap: break-word;
+}
+
+.next-card-body {
+  flex: unset;
 }
