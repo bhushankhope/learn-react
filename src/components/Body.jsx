@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import RESTAURANT_LIST from "../utils/mockData";
-import RestaurantCard from "./RestaurantCard";
 import { Button } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/react";
-import ShimmerUI from "./Shimmer";
 import { Input } from "@nextui-org/react";
 import NextCard from "./NextCard";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -19,7 +17,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&collection=80403&tags=layout_Shawarma_Contextual&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&collection=80439&tags=layout_CCS_PureVeg&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
     );
     const jsonData = await data.json();
     const validCards = jsonData.data.cards.filter(
@@ -29,14 +27,17 @@ const Body = () => {
     setFilteredRestaurants(validCards);
   };
 
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus===false) {
+    return <h1>You are offline</h1>
+  }
+
   const handleClick = () => {
     const filteredList = restaurants.filter(
       (res) => res.card.card.info.avgRating > 4
     );
     setFilteredRestaurants(filteredList);
   };
-
-  console.log(restaurants);
 
   return restaurants.length === 0 ? (
     <Spinner>Loading</Spinner>
