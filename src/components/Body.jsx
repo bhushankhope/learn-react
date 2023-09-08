@@ -28,8 +28,8 @@ const Body = () => {
   };
 
   const onlineStatus = useOnlineStatus();
-  if(onlineStatus===false) {
-    return <h1>You are offline</h1>
+  if (onlineStatus === false) {
+    return <h1>You are offline</h1>;
   }
 
   const handleClick = () => {
@@ -42,8 +42,8 @@ const Body = () => {
   return restaurants.length === 0 ? (
     <Spinner>Loading</Spinner>
   ) : (
-    <div className="body">
-      <div className="filter flex">
+    <div className="body flex-col">
+      <div className="filter flex justify-center mb-8">
         <div className="search-container flex">
           <Input
             type="email"
@@ -77,7 +77,7 @@ const Body = () => {
           Top Rated Restaurants
         </Button>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center gap-4">
         {filteredRestaurants.length === 0 ? (
           <h1>No restaurants available</h1>
         ) : (
