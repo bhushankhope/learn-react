@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NextUIProvider } from "@nextui-org/react";
 import ReactDOM from 'react-dom/client'
 import Header from './components/Header'
@@ -8,14 +8,18 @@ import About from './components/About';
 import NextCard from './components/NextCard';
 import Error from './components/Error';
 import RestaurantMenu from './components/RestaurantMenu';
+import UserContext from './utils/UserContext';
 
 const Layout = () => {
+  const [userName, setUserName] = useState();
   return (
     <NextUIProvider>
-      <div className='app'>
-        <Header></Header>
-        <Outlet></Outlet>
-      </div>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className='app'>
+          <Header></Header>
+          <Outlet></Outlet>
+        </div>
+      </UserContext.Provider>
     </NextUIProvider>
   )
 }

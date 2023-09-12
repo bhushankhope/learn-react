@@ -2,49 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid black;
+.res-max-w-custom {
+  max-width: calc(100% - 144px);
 }
-
-.logo {
-  width: 128px;
-  height: 128px;
-}
-
-.nav-items {
-  padding: 0px 15px;
-}
-
-.nav-items ul {
-  display: flex;
-  list-style-type: none;
-  font-size: 1.5rem;
-}
-
-.nav-items ul li {
-  padding-right: 2rem;
-}
-
-.restaurant-logo {
-  width: 100%;
-}
-
-.restaurant-card {
-  max-width: 18rem;
-}
-
-.restaurant-card:hover {
-  border: solid black;
-  cursor: pointer;
-}
-
-.restaurant-name,
-.restaurant-cusine,
-.restaurant-rating,
-.restaurant-est-time {
-  margin: 0.5rem 0rem;
-  overflow-wrap: break-word;
-} */
