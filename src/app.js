@@ -10,19 +10,22 @@ import Error from './components/Error';
 import RestaurantMenu from './components/RestaurantMenu';
 import UserContext from './utils/UserContext';
 import { Provider } from 'react-redux';
-import appStore from './utils/appStore';
+import appStore, { persistor } from './utils/appStore';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Layout = () => {
   const [userName, setUserName] = useState();
   return (
     <NextUIProvider>
       <Provider store={appStore}>
-        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-          <div className='app'>
-            <Header></Header>
-            <Outlet></Outlet>
-          </div>
-        </UserContext.Provider>
+        <PersistGate loading={null} persistor={persistor}>
+          <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+            <div className='app'>
+              <Header></Header>
+              <Outlet></Outlet>
+            </div>
+          </UserContext.Provider>
+        </PersistGate>
       </Provider>
     </NextUIProvider>
   )
