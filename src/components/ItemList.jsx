@@ -1,8 +1,18 @@
 import React from "react";
 import { CDN_URL } from "../utils/constants";
 import { Button } from "@nextui-org/react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ items }) => {
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    //dispatch an action
+    dispatch(addItem(item))
+  }
+
   return (
     <div>
       {items.map((item) => (
@@ -24,7 +34,8 @@ const ItemList = ({ items }) => {
           </div>
           <div className="relative w-3/12 h-full]">
             <div className="absolute bottom-0">
-              <Button className="bottom-0" color="success">
+              <Button className="bottom-0" color="success"
+              onClick={()=>handleAddItem(item)}>
                 Add Item +
               </Button>
             </div>
