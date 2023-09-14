@@ -12,6 +12,7 @@ import UserContext from './utils/UserContext';
 import { Provider } from 'react-redux';
 import appStore, { persistor } from './utils/appStore';
 import { PersistGate } from 'redux-persist/integration/react';
+import '../index.css'
 
 const Layout = () => {
   const [userName, setUserName] = useState();
@@ -22,7 +23,9 @@ const Layout = () => {
           <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
             <div className='app'>
               <Header></Header>
-              <Outlet></Outlet>
+              <div className='px-32'>
+                <Outlet></Outlet>
+              </div>
             </div>
           </UserContext.Provider>
         </PersistGate>

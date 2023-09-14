@@ -9,10 +9,10 @@ const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
   // console.log(cartItems);
   return (
-    <div className="flex justify-between items-center shadow-lg mb-8 bg-indigo-900">
-      <div className="w-36">
+    <div className="flex justify-between items-center shadow-lg mb-8 bg-indigo-900 h-16">
+      <div className="ml-4">
         <Link to={"/"}>
-          <img src={LOGO_URL} className="logo"></img>
+        <span className="uppercase text-white">Foody</span>
         </Link>
       </div>
       <div className="nav-items">
@@ -26,7 +26,7 @@ const Header = () => {
           <li>
             <Link to={"/contact-us"}>Contact Us</Link>
           </li>
-          <li className="font-bold text-xl">
+          <li className="font-bold">
             <Link to={"/cart"}>Cart ({cartItems.length} items)</Link>
           </li>
           <li className="font-bold">{data.loggedInUser}</li>

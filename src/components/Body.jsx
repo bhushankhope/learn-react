@@ -6,11 +6,14 @@ import NextCard, { withDiscountedLabel } from "./NextCard";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { REST_URL } from "../utils/constants";
+import '../../index.css'
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  console.log(filteredRestaurants);
 
   const NextCardDiscounted = withDiscountedLabel(NextCard);
   const { loggedInUser, setUserName } = useContext(UserContext);
@@ -20,9 +23,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&collection=83649&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
-    );
+    const data = await fetch(REST_URL);
     const jsonData = await data.json();
     const validCards = jsonData?.data?.cards?.filter(
       (item) => item.card && item.card.card && item.card.card.info
@@ -81,25 +82,28 @@ const Body = () => {
           Top Rated Restaurants
         </Button>
       </div>
-      <div className="flex flex-wrap justify-center gap-4">
-        {filteredRestaurants?.length === 0 ? (
-          <h1>No restaurants available</h1>
-        ) : (
-          filteredRestaurants?.map((restaurant) => (
-            <Link
-              key={restaurant.card.card?.info.id}
-              to={"/restaurants/" + restaurant?.card?.card?.info?.id}
-            >
-              {restaurant?.card?.card?.info?.aggregatedDiscountInfoV3
-                ?.header ? (
-                <NextCardDiscounted restaurantData={restaurant} />
-              ) : (
-                <NextCard restaurantData={restaurant}></NextCard>
-              )}
-              {/* <NextCard restaurantData={restaurant}></NextCard> */}
-            </Link>
-          ))
-        )}
+      <div className="flex flex-col">
+      <div className="text-3xl font-semibold mb-4 text-center">Top Restaurants Near You</div>
+        <div className="flex justify-center flex-wrap gap-4">
+          {filteredRestaurants?.length === 0 ? (
+            <h1>No restaurants available</h1>
+          ) : (
+            filteredRestaurants?.map((restaurant) => (
+              <Link
+                key={restaurant.card.card?.info.id}
+                to={"/restaurants/" + restaurant?.card?.card?.info?.id}
+              >
+                {restaurant?.card?.card?.info?.aggregatedDiscountInfoV3
+                  ?.header ? (
+                  <NextCardDiscounted restaurantData={restaurant} />
+                ) : (
+                  <NextCard restaurantData={restaurant}></NextCard>
+                )}
+                {/* <NextCard restaurantData={restaurant}></NextCard> */}
+              </Link>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

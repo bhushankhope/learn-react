@@ -9,7 +9,7 @@ export const NextCard = (props) => {
 
   return (
     <Card className="max-w-xs h-[20rem] w-[20rem]">
-      <CardBody className="overflow-hidden h-[30rem]">
+      <CardBody className="overflow-hidden h-[30rem] p-4">
         <Image
           alt="Restaurant Image"
           className="object-cover h-full w-full rounded-xl" // Set image height to 100% and use object-cover
@@ -18,7 +18,7 @@ export const NextCard = (props) => {
         />
         {/* <h1 className="uppercase absolute z-10">{restaurantData?.card?.card?.info?.aggregatedDiscountInfoV3?.header}</h1> */}
       </CardBody>
-      <CardHeader className="pb-0 pt-2 flex-col items-start">
+      <CardHeader className="px-4 pb-4 pt-0 flex-col items-start">
         <h4 className="font-bold text-large text-ellipsis truncate">{name}</h4>
         <h1>{costForTwo}</h1>
         <span className="text-ellipsis truncate">{cuisines.join(", ")}</span>
