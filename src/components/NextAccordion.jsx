@@ -2,11 +2,9 @@ import React from "react";
 import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 
 export default function NextAccordion({ data }) {
-  // console.log(data);
   const { title } = data;
   const strippedTitle = title.replace(/[^\w\s]/gi, "");
   const { itemCards } = data;
-  console.log(data);
   return (
     <div>
       <Accordion variant="light">

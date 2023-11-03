@@ -23,9 +23,7 @@ const Layout = () => {
           <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
             <div className='app'>
               <Header></Header>
-              <div className='px-32'>
-                <Outlet></Outlet>
-              </div>
+              <Outlet></Outlet>
             </div>
           </UserContext.Provider>
         </PersistGate>

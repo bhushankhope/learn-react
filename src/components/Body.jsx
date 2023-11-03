@@ -1,19 +1,20 @@
-import { useContext, useEffect, useState } from "react";
-import { Button } from "@nextui-org/react";
-import { Spinner } from "@nextui-org/react";
-import { Input } from "@nextui-org/react";
-import NextCard, { withDiscountedLabel } from "./NextCard";
-import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
-import UserContext from "../utils/UserContext";
-import { REST_URL } from "../utils/constants";
-import '../../index.css'
+import { useContext, useEffect, useState } from 'react';
+import { Button } from '@nextui-org/react';
+import { Spinner } from '@nextui-org/react';
+import { Input } from '@nextui-org/react';
+import NextCard, { withDiscountedLabel } from './NextCard';
+import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
+import { REST_URL } from '../utils/constants';
+import '../../index.css';
+import WhatsOnMind from './WhatsOnMind';
+import Footer from './Footer';
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  console.log(filteredRestaurants);
 
   const NextCardDiscounted = withDiscountedLabel(NextCard);
   const { loggedInUser, setUserName } = useContext(UserContext);
@@ -48,7 +49,7 @@ const Body = () => {
     <Spinner>Loading</Spinner>
   ) : (
     <div className="body flex-col">
-      <div className="filter flex justify-center mb-8">
+      <div className="filter flex mb-8">
         <div className="search-container flex">
           <Input
             type="email"
@@ -82,16 +83,19 @@ const Body = () => {
           Top Rated Restaurants
         </Button>
       </div>
-      <div className="flex flex-col">
-      <div className="text-3xl font-semibold mb-4 text-center">Top Restaurants Near You</div>
-        <div className="flex justify-center flex-wrap gap-4">
+      <WhatsOnMind></WhatsOnMind>
+      <div className="flex flex-col res-container">
+        <div className="text-3xl font-semibold mb-4">
+          Top Restaurants Near You
+        </div>
+        <div className="flex flex-wrap gap-4">
           {filteredRestaurants?.length === 0 ? (
             <h1>No restaurants available</h1>
           ) : (
             filteredRestaurants?.map((restaurant) => (
               <Link
                 key={restaurant.card.card?.info.id}
-                to={"/restaurants/" + restaurant?.card?.card?.info?.id}
+                to={'/restaurants/' + restaurant?.card?.card?.info?.id}
               >
                 {restaurant?.card?.card?.info?.aggregatedDiscountInfoV3
                   ?.header ? (
@@ -105,6 +109,7 @@ const Body = () => {
           )}
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

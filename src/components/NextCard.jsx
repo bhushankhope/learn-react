@@ -8,7 +8,7 @@ export const NextCard = (props) => {
     restaurantData?.card?.card?.info;
 
   return (
-    <Card className="max-w-xs h-[20rem] w-[20rem]">
+    <Card className="max-w-xs h-[20rem] w-[18rem]">
       <CardBody className="overflow-hidden h-[30rem] p-4">
         <Image
           alt="Restaurant Image"
