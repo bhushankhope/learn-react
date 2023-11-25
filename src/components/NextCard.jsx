@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { CDN_URL } from "../utils/constants";
+import '../../index.css'
 
 export const NextCard = (props) => {
   const { restaurantData } = props;
@@ -8,7 +9,7 @@ export const NextCard = (props) => {
     restaurantData?.card?.card?.info;
 
   return (
-    <Card className="max-w-xs h-[20rem] w-[18rem]">
+    <Card className="h-[20rem] min-w-[20rem] max-w-[23rem] bg-white main-card" shadow='none'>
       <CardBody className="overflow-hidden h-[30rem] p-4">
         <Image
           alt="Restaurant Image"

@@ -33,8 +33,8 @@ const ItemList = ({ items }) => {
             <p className="text-xs">{item?.card?.info?.description}</p>
           </div>
           <div className="relative w-3/12 h-full]">
-            <div className="absolute bottom-0">
-              <Button className="bottom-0" color="success"
+            <div className="absolute bottom-0 left-8">
+              <Button className="bottom-0 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg" color="red"
               onClick={()=>handleAddItem(item)}>
                 Add Item +
               </Button>

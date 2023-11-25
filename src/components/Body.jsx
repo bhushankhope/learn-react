@@ -9,7 +9,7 @@ import UserContext from '../utils/UserContext';
 import { REST_URL } from '../utils/constants';
 import '../../index.css';
 import WhatsOnMind from './WhatsOnMind';
-import Footer from './Footer';
+import { Divider } from '@nextui-org/react';
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -48,68 +48,73 @@ const Body = () => {
   return restaurants?.length === 0 ? (
     <Spinner>Loading</Spinner>
   ) : (
-    <div className="body flex-col">
-      <div className="filter flex mb-8">
-        <div className="search-container flex">
-          <Input
-            type="email"
-            label="Search"
-            className="w-[340px] search-box"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <div className="body">
+        <div className="filter flex mb-8">
+          <div className="search-container flex">
+            <Input
+              type="email"
+              label="Search"
+              className="w-[340px] search-box"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+            />
+            <Button
+              color="success"
+              onClick={() => {
+                const searchedRestaurants = restaurants.filter((res) =>
+                  res.card.card.info.name
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
+                );
+                setFilteredRestaurants(searchedRestaurants);
+              }}
+              className="filter-btn m-2"
+            >
+              Search
+            </Button>
+          </div>
           <Button
             color="success"
-            onClick={() => {
-              const searchedRestaurants = restaurants.filter((res) =>
-                res.card.card.info.name
-                  .toLowerCase()
-                  .includes(searchText.toLowerCase())
-              );
-              setFilteredRestaurants(searchedRestaurants);
-            }}
+            onClick={handleClick}
             className="filter-btn m-2"
           >
-            Search
+            Top Rated Restaurants
           </Button>
         </div>
-        <Button
-          color="success"
-          onClick={handleClick}
-          className="filter-btn m-2"
-        >
-          Top Rated Restaurants
-        </Button>
-      </div>
-      <WhatsOnMind></WhatsOnMind>
-      <div className="flex flex-col res-container">
-        <div className="text-3xl font-semibold mb-4">
-          Top Restaurants Near You
-        </div>
-        <div className="flex flex-wrap gap-4">
-          {filteredRestaurants?.length === 0 ? (
-            <h1>No restaurants available</h1>
-          ) : (
-            filteredRestaurants?.map((restaurant) => (
-              <Link
-                key={restaurant.card.card?.info.id}
-                to={'/restaurants/' + restaurant?.card?.card?.info?.id}
-              >
-                {restaurant?.card?.card?.info?.aggregatedDiscountInfoV3
-                  ?.header ? (
-                  <NextCardDiscounted restaurantData={restaurant} />
-                ) : (
-                  <NextCard restaurantData={restaurant}></NextCard>
-                )}
-                {/* <NextCard restaurantData={restaurant}></NextCard> */}
-              </Link>
-            ))
-          )}
+        <WhatsOnMind></WhatsOnMind>
+        <Divider className='mt-4'></Divider>
+        <div className="flex flex-col res-container">
+          <div className="text-3xl font-semibold my-4">
+            Top Restaurants Near You
+          </div>
+          <div className="cards-container">
+            {filteredRestaurants?.length === 0 ? (
+              <h1>No restaurants available</h1>
+            ) : (
+              filteredRestaurants?.map((restaurant) => (
+                <Link
+                  key={restaurant.card.card?.info.id}
+                  to={'/restaurants/' + restaurant?.card?.card?.info?.id}
+                >
+                  {restaurant?.card?.card?.info?.aggregatedDiscountInfoV3
+                    ?.header ? (
+                    <NextCardDiscounted
+                      restaurantData={restaurant}
+                      shadow={'none'}
+                    />
+                  ) : (
+                    <NextCard restaurantData={restaurant}></NextCard>
+                  )}
+                  {/* <NextCard restaurantData={restaurant}></NextCard> */}
+                </Link>
+              ))
+            )}
+          </div>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

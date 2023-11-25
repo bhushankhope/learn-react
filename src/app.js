@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import appStore, { persistor } from './utils/appStore';
 import { PersistGate } from 'redux-persist/integration/react';
 import '../index.css'
+import Footer from './components/Footer';
 
 const Layout = () => {
   const [userName, setUserName] = useState();
@@ -24,6 +25,7 @@ const Layout = () => {
             <div className='app'>
               <Header></Header>
               <Outlet></Outlet>
+              <Footer></Footer>
             </div>
           </UserContext.Provider>
         </PersistGate>
